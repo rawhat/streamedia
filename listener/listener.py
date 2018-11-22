@@ -16,8 +16,9 @@ async def run():
         with loopback.recorder(samplerate=44100) as mic:
                 while True:
                         try:
-                                data = mic.record(numframes=1024)
-                                print("Got data: {}".format(data))
+                                data = mic.record()
+                                # print("Got data: {}".format(data))
+                                print("sending data")
                                 await ws.send(json.dumps(data.tolist()))
                         except Exception as e:
                                 print("Uh oh... failed: {}".format(e))

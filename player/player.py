@@ -1,5 +1,6 @@
 import asyncio
 import json
+import numpy as np
 import soundcard as sc
 import websockets
 
@@ -10,6 +11,7 @@ async def play():
     while True:
       message = await ws.recv()
       data = json.loads(message)
+      arr = np.asarray(data, dtype=np.float32)
       output.play(data, samplerate=44100)
 
 if __name__ == "__main__":
