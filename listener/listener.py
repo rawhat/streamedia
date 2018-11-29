@@ -1,8 +1,10 @@
 import socket
 import soundcard as sc
+import sys
 
-UDP_IP_ADDR = "localhost"
-UDP_PORT_NO = 3000
+# UDP_IP_ADDR = "255.255.255.255"
+UDP_IP_ADDR = "192.168.173.191"
+UDP_PORT_NO = 3001
 
 def run():
   print("connecting to socket server")
@@ -15,13 +17,15 @@ def run():
     print("No loopback device detected, exiting...")
     exit(1)
   print("Found a loopback microphone with: {}".format(loopback))
-  with loopback.recorder(samplerate=44100) as mic:
+  with loopback.recorder(samplerate=44100, channels=2) as mic:
     while True:
       try:
         data = mic.record()
         byte = data.tobytes()
-        client.sendto(byte, (UDP_IP_ADDR, UDP_PORT_NO))
-        mic.flush()
+        print(byte)
+        sys.stdout.flush()
+        # client.sendto(byte, (UDP_IP_ADDR, UDP_PORT_NO))
+        # mic.flush()
       except Exception as e:
         print("Uh oh... failed: {}".format(e))
         exit(1)

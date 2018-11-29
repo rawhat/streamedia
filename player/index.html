@@ -5,15 +5,22 @@
     <script type="application/javascript" src="./phoenix.js"></script>
   </head>
   <script type="application/javascript">
-    document.addEventListener('DOMContentLoaded', () => {
-      const ws = new Phoenix.Socket('ws://localhost:4000/socket')
-      ws.connect()
-      const channel = ws.channel("room:1")
-      channel.on("packet", (data) => {
-        console.log('got data', data)
-      })
-      channel.join()
-    })
+    // document.addEventListener('DOMContentLoaded', () => {
+    //   const ws = new Phoenix.Socket('ws://localhost:4000/socket')
+    //   ws.connect()
+    //   const channel = ws.channel("room:1")
+    //   channel.on("packet", (data) => {
+    //     console.log('got data', data)
+    //   })
+    //   channel.join()
+    // })
+    const ws = new WebSocket('ws://localhost:8080/socket')
+    ws.onopen = () => {
+      console.log('opened socket')
+    }
+    ws.onmessage = (message) => {
+      console.log('got buffer', message)
+    }
   </script>
   <body>
     <div id='content'></div>

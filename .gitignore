@@ -1,0 +1,6 @@
+pip-selfcheck.json
+pyvenv.cfg
+.vscode/*
+Lib/*
+Scripts/*
+web/lib/*
