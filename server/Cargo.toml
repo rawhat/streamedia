@@ -1,7 +1,0 @@
-[package]
-name = "server"
-version = "0.1.0"
-authors = ["Alex Manning <alex41290@gmail.com>"]
-
-[dependencies]
-cpal = { git = "https://github.com/rawhat/cpal" }

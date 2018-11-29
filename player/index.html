@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>testies</title>
+  </head>
+  <script type="application/javascript">
+    document.on('DOMContentLoaded', () => {
+      const ws = new WebSocket('http://localhost:3001')
+      ws.onopen = () => {
+        console.log('socket opened!')
+      }
+      ws.onmessage = (ev) => {
+        console.log('got message', ev.data)
+      }
+    })
+  </script>
+  <body>
+    <div id='content'></div>
+  </body>
+</html>
