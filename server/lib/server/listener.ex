@@ -12,8 +12,7 @@ defmodule Server.Listener do
   end
 
   def handle_info({:udp, _socket, _address, _port, data}, socket) do
-    IO.puts "here"
-    IO.inspect data
+    ServerWeb.Endpoint.broadcast("room:1", "packet", %{"data" => data})
     {:noreply, socket}
   end
 end

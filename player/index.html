@@ -2,16 +2,17 @@
 <html lang="en">
   <head>
     <title>testies</title>
+    <script type="application/javascript" src="./phoenix.js"></script>
   </head>
   <script type="application/javascript">
-    document.on('DOMContentLoaded', () => {
-      const ws = new WebSocket('http://localhost:3001')
-      ws.onopen = () => {
-        console.log('socket opened!')
-      }
-      ws.onmessage = (ev) => {
-        console.log('got message', ev.data)
-      }
+    document.addEventListener('DOMContentLoaded', () => {
+      const ws = new Phoenix.Socket('ws://localhost:4000/socket')
+      ws.connect()
+      const channel = ws.channel("room:1")
+      channel.on("packet", (data) => {
+        console.log('got data', data)
+      })
+      channel.join()
     })
   </script>
   <body>
